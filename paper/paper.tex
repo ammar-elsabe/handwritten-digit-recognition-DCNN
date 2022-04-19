@@ -1,46 +1,62 @@
-\documentclass[11pt]{article}
-\usepackage[a4paper, total={6.8in, 10.2in}]{geometry}
+\documentclass[conference]{IEEEtran}
 \usepackage{amsmath}
 \usepackage{blindtext}
 \usepackage{graphicx}
-\usepackage[symbol]{footmisc}
-\usepackage{apacite}
 
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
-    bookmarksopen=true
+    bookmarksopen=true,
 }
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
-\renewcommand\bibliographytypesize{\scriptsize}
-
-\title{Handwritten Digit Recognition Using Deep Convolutional Neural Network\footnotemark}
-\author{Ammar Elsabe \hfill{} U19100452\\
-        Mohamed Alzaabi \hfill{} U17105281\\
-        Abdulaziz Abdullatif \hfill{} U18103708\\
-}
-
-\date{}
 
 \begin{document}
 
-\twocolumn[{%
-    \begin{@twocolumnfalse}
-        \maketitle
-        \begin{abstract}
-            \blindtext
-        \end{abstract}
-    \end{@twocolumnfalse}
-}]
+\title{Handwritten Digit Recognition Using Deep Convolutional Neural Network*}
+
+
+
+
+\author{\IEEEauthorblockN{Ammar Elsabe}
+\IEEEauthorblockA{
+    U19100452@sharjah.ac.ae\\
+    University ID: U19100452
+}
+
+\and
+
+\IEEEauthorblockN{Mohamed Alzaabi}
+\IEEEauthorblockA{
+    U17105281@sharjah.ac.ae\\
+    University ID: U17105281
+}
+
+\and
+
+\IEEEauthorblockN{Abdulaziz Abdullatif}
+\IEEEauthorblockA{
+    U18103708@sharjah.ac.ae\\
+    University ID: U18103708
+}}
+
+\maketitle
+\begin{abstract}
+    \blindtext
+\end{abstract}
 
 \section{Introduction}
-\footnotetext[1]{Code can be found at \url{github.com/ammar-elsabe/handwritten-digit-recognition-DCNN.git}}
+\footnotetext[1]{Code can be found at \href{github.com/ammar-elsabe/handwritten-digit-recognition-DCNN.git}{\texttt{github.com/ammar-elsabe/handwritten-\\digit-recognition-DCNN.git}}}
 \Blindtext
 
-\section{Applications of CNNs}
+\section{CNNs And Their Applications}
 \Blindtext
 
 \section{The MNIST Dataset}
+\Blindtext
 
 \section{The Architecture Used}
 \Blindtext
@@ -48,11 +64,10 @@
 \section{Model Evaluation}
 \blindtext
 
-
 \section{Conclusion}
 \blindtext
 
-\bibliographystyle{apacite}
-\bibliography{paper.bib}
+%\bibliographystyle{IEEEtran}
+%\bibliography{paper.bib}
 
 \end{document}
