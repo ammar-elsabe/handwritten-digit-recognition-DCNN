@@ -2,6 +2,8 @@
 \usepackage{amsmath}
 \usepackage{blindtext}
 \usepackage{graphicx}
+\usepackage[caption=false]{subfig}
+\usepackage{import}
 
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
@@ -54,20 +56,55 @@
 
 \section{CNNs And Their Applications}
 \Blindtext
+\cite{Goodfellow-et-al-2016}
 
 \section{The MNIST Dataset}
+\cite{6296535}
 \Blindtext
 
 \section{The Architecture Used}
+\begin{figure}[!htp]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \scriptsize
+    \import{./figs/}{cnn_architecture.pdf_tex}
+\end{figure}
 \Blindtext
 
 \section{Model Evaluation}
+\begin{figure}[!htp]
+    \centering
+    \scriptsize
+    \subfloat[Training and validation accuracy\label{performance:accuracy}]{
+        \def\svgwidth{0.5\columnwidth}
+        \import{./figs/}{accuracy.pdf_tex}
+    }
+    \subfloat[Training and validation loss\label{performance:loss}]{
+        \def\svgwidth{0.5\columnwidth}
+        \import{./figs/}{loss.pdf_tex}
+    }
+    \caption{The per--epoch progress of the model's performance }
+\end{figure}
+\begin{figure}[!htp]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \scriptsize
+    \import{./figs/}{confusion_matrix.pdf_tex}
+    \caption{Confusion matrix of the trained model}\label{fig:confusion_matrix}
+\end{figure}
 \blindtext
+\begin{figure}[!htp]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \Huge
+    \import{./figs/}{bar_plot.pdf_tex}
+    \caption{The accuracy of the model at detecting each digit}\label{fig:confusion_matrix_normalized}
+\end{figure}
 
 \section{Conclusion}
 \blindtext
 
-%\bibliographystyle{IEEEtran}
-%\bibliography{paper.bib}
+\bibliographystyle{IEEEtran}
+\bibliography{paper.bib}
 
 \end{document}

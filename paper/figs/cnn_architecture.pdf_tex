@@ -1,0 +1,214 @@
+%% Creator: Inkscape 1.1.2 (0a00cf5339, 2022-02-04, custom), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'cnn_architecture.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{939.99765bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.98676749)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{cnn_architecture.pdf}}%
+    \put(0.15784499,1.9495275){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}rescaling\_input\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{cnn_architecture.pdf}}%
+    \put(0.15784499,1.90604913){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}InputLayer\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{cnn_architecture.pdf}}%
+    \put(0.34120983,1.9495275){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{cnn_architecture.pdf}}%
+    \put(0.34120983,1.90604913){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{cnn_architecture.pdf}}%
+    \put(0.54442344,1.92778826){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}[(None, 28, 28, 1)]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{cnn_architecture.pdf}}%
+    \put(0.82230624,1.92778826){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}[(None, 28, 28, 1)]\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{cnn_architecture.pdf}}%
+    \put(0.17674858,1.79262758){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}rescaling\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{cnn_architecture.pdf}}%
+    \put(0.17674858,1.74914932){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Rescaling\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{cnn_architecture.pdf}}%
+    \put(0.32230624,1.79262758){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{cnn_architecture.pdf}}%
+    \put(0.32230624,1.74914932){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{cnn_architecture.pdf}}%
+    \put(0.51606806,1.77088845){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 28, 28, 1)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{cnn_architecture.pdf}}%
+    \put(0.77504726,1.77088845){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 28, 28, 1)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{cnn_architecture.pdf}}%
+    \put(0.16824197,1.63572777){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}conv2d\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{cnn_architecture.pdf}}%
+    \put(0.16824197,1.5922495){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Conv2D\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{cnn_architecture.pdf}}%
+    \put(0.30151229,1.63572777){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{cnn_architecture.pdf}}%
+    \put(0.30151229,1.5922495){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{cnn_architecture.pdf}}%
+    \put(0.49527411,1.61398863){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 28, 28, 1)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{cnn_architecture.pdf}}%
+    \put(0.76275993,1.61398863){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 26, 26, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{cnn_architecture.pdf}}%
+    \put(0.15973535,1.47882795){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}max\_pooling2d\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{cnn_architecture.pdf}}%
+    \put(0.15973535,1.43534969){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}MaxPooling2D\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{cnn_architecture.pdf}}%
+    \put(0.34120983,1.47882795){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{cnn_architecture.pdf}}%
+    \put(0.34120983,1.43534969){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{cnn_architecture.pdf}}%
+    \put(0.54347826,1.45708882){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 26, 26, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=24]{cnn_architecture.pdf}}%
+    \put(0.8194707,1.45708882){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 13, 13, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=25]{cnn_architecture.pdf}}%
+    \put(0.15973535,1.32192814){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}batch\_normalization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=26]{cnn_architecture.pdf}}%
+    \put(0.15973535,1.27844988){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}BatchNormalization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=27]{cnn_architecture.pdf}}%
+    \put(0.37618147,1.32192814){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=28]{cnn_architecture.pdf}}%
+    \put(0.37618147,1.27844988){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=29]{cnn_architecture.pdf}}%
+    \put(0.57844991,1.30018901){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 13, 13, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=30]{cnn_architecture.pdf}}%
+    \put(0.85444235,1.30018901){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 13, 13, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=31]{cnn_architecture.pdf}}%
+    \put(0.15973535,1.16502833){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}conv2d\_1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=32]{cnn_architecture.pdf}}%
+    \put(0.15973535,1.12155007){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Conv2D\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=33]{cnn_architecture.pdf}}%
+    \put(0.30245747,1.16502833){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=34]{cnn_architecture.pdf}}%
+    \put(0.30245747,1.12155007){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=35]{cnn_architecture.pdf}}%
+    \put(0.5047259,1.1432892){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 13, 13, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=36]{cnn_architecture.pdf}}%
+    \put(0.78071834,1.1432892){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 11, 11, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=37]{cnn_architecture.pdf}}%
+    \put(0.17674859,1.00812852){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}max\_pooling2d\_1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=38]{cnn_architecture.pdf}}%
+    \put(0.17674858,0.96465026){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}MaxPooling2D\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=39]{cnn_architecture.pdf}}%
+    \put(0.37334594,1.00812852){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=40]{cnn_architecture.pdf}}%
+    \put(0.37334594,0.96465026){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=41]{cnn_architecture.pdf}}%
+    \put(0.57561437,0.98638939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 11, 11, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=42]{cnn_architecture.pdf}}%
+    \put(0.83459358,0.98638939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 5, 5, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=43]{cnn_architecture.pdf}}%
+    \put(0.19376182,0.85122871){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}batch\_normalization\_1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=44]{cnn_architecture.pdf}}%
+    \put(0.19376181,0.80775045){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}BatchNormalization\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=45]{cnn_architecture.pdf}}%
+    \put(0.42533081,0.85122871){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=46]{cnn_architecture.pdf}}%
+    \put(0.42533081,0.80775045){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=47]{cnn_architecture.pdf}}%
+    \put(0.61058601,0.82948958){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 5, 5, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=48]{cnn_architecture.pdf}}%
+    \put(0.85255199,0.82948958){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 5, 5, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=49]{cnn_architecture.pdf}}%
+    \put(0.21928166,0.6943289){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}flatten\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=50]{cnn_architecture.pdf}}%
+    \put(0.21928166,0.65085064){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Flatten\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=51]{cnn_architecture.pdf}}%
+    \put(0.34782609,0.6943289){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=52]{cnn_architecture.pdf}}%
+    \put(0.34782609,0.65085064){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=53]{cnn_architecture.pdf}}%
+    \put(0.53308129,0.67258977){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 5, 5, 28)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=54]{cnn_architecture.pdf}}%
+    \put(0.74952741,0.67258977){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 700)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=55]{cnn_architecture.pdf}}%
+    \put(0.24480151,0.53742909){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}dense\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=56]{cnn_architecture.pdf}}%
+    \put(0.24480151,0.49395083){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Dense\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=57]{cnn_architecture.pdf}}%
+    \put(0.36672968,0.53742909){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=58]{cnn_architecture.pdf}}%
+    \put(0.36672968,0.49395083){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=59]{cnn_architecture.pdf}}%
+    \put(0.52646503,0.51568996){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 700)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=60]{cnn_architecture.pdf}}%
+    \put(0.71739131,0.51568996){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 128)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=61]{cnn_architecture.pdf}}%
+    \put(0.24480151,0.38052931){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}dense\_1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=62]{cnn_architecture.pdf}}%
+    \put(0.24480151,0.33705105){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Dense\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=63]{cnn_architecture.pdf}}%
+    \put(0.37901701,0.38052931){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=64]{cnn_architecture.pdf}}%
+    \put(0.37901701,0.33705105){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=65]{cnn_architecture.pdf}}%
+    \put(0.53875237,0.35879018){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 128)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=66]{cnn_architecture.pdf}}%
+    \put(0.72967864,0.35879018){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 128)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=67]{cnn_architecture.pdf}}%
+    \put(0.24480151,0.2236295){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}dense\_2\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=68]{cnn_architecture.pdf}}%
+    \put(0.24480151,0.18015123){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Dense\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=69]{cnn_architecture.pdf}}%
+    \put(0.37901701,0.2236295){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=70]{cnn_architecture.pdf}}%
+    \put(0.37901701,0.18015123){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=71]{cnn_architecture.pdf}}%
+    \put(0.53875237,0.20189036){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 128)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=72]{cnn_architecture.pdf}}%
+    \put(0.72967864,0.20189036){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 128)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=73]{cnn_architecture.pdf}}%
+    \put(0.25330813,0.06672968){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}dense\_3\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=74]{cnn_architecture.pdf}}%
+    \put(0.25330813,0.02325142){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Dense\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=75]{cnn_architecture.pdf}}%
+    \put(0.38752363,0.06672968){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}input:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=76]{cnn_architecture.pdf}}%
+    \put(0.38752363,0.02325142){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}output:\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=77]{cnn_architecture.pdf}}%
+    \put(0.54725898,0.04499055){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 128)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=78]{cnn_architecture.pdf}}%
+    \put(0.72967864,0.04499055){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}(None, 10)\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=79]{cnn_architecture.pdf}}%
+  \end{picture}%
+\endgroup%
