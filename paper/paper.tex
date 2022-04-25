@@ -4,6 +4,9 @@
 \usepackage{graphicx}
 \usepackage[caption=false]{subfig}
 \usepackage{import}
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
@@ -47,22 +50,36 @@
 
 \maketitle
 \begin{abstract}
-    \blindtext
+    A Convolutional Neural Network (CNN) is a powerful tool for image classification.\@ However, despite existing since the late 1980s, they have been majorly dormant until the mid-2000s, which is when computing power and large databases of labeled data started becoming more accessible thanks to GPU technology and the internet, respectively.\@ This paper pits the use of a Deep Convolutional Neural Network (DCNN) against the MNIST database of handwritten digit images, and as will be seen by the end of the paper, the performance of these networks on a (cheap, consumer) GPU is simply a marvel of engineering, nearing human--level accuracy.
 \end{abstract}
 
 \section{Introduction}
 \footnotetext[1]{Code can be found at \href{github.com/ammar-elsabe/handwritten-digit-recognition-DCNN.git}{\texttt{github.com/ammar-elsabe/handwritten-\\digit-recognition-DCNN.git}}}
+Computer vision is an interdisciplinary field that asks the question: ``Can a computer learn from pictures?''.\@ After all, a picture is worth a thousand words.\@ One interesting field of computer vision is Optical Character Recognition (OCR), which aims to identify the characters in 
 \Blindtext
 
-\section{CNNs And Their Applications}
-\Blindtext
+\section{Advancements in OCR}
+\blindtext
+\subsection{Neural Networks}
+\blindtext
+\subsubsection{Deep Neural Networks}
+\blindtext
+\subsubsection{Convolutional Neural Networks}
 \cite{Goodfellow-et-al-2016}
+\blindtext
 
 \section{The MNIST Dataset}
-\cite{6296535}
-\Blindtext
+The Modified National Institute of Standards and Technology (MNIST) database is a database of handwritten digits \cite{6296535} that is a classic benchmark for image recognition.\@ It is also widely used in the machine learning world\cite{Platt1998}.\@ It consists of a training set of 60,000 images and a test set of 10,000 images.\@ The training set is used to train the network, and the test set is used to evaluate its performance.\@ The images are $28 \times 28$ pixels, and the labels are 0 to 9. It is a subset of a larger set available from NIST.\@ It was created in 1998 as a combination of two of their databases, Special Database 1 and 3, which contained digits written by high school students and empoyees of the United States Census Bureau, respectively.\@ Half of the database was taken from ``Special Database 1'', and the other half was taken from ``Special Database 3''. The original creators kept a list of the methods tested on it\cite{726791, mnist}, and in their original paper they used a Support Vector Machine (SVM) to achieve an accuracy of 99.2\%\cite{1265868}.
+\par
+There exists another database called Extended MNIST (EMNIST) created to the successor to MNIST\cite{emnist} created from NIST ``Special Database 19'', which includes the handwritten uppercase and lowercase letters, as well as digits.\cite{emnist2} EMNIST was created only using the digits subset of ``Special Database 19''. In the following sections of this paper, we use MNIST (not EMNIST) for testing our CNN.\@
 
-\section{The Architecture Used}
+\section{Training the model}
+We used Google's TensorFlow API\cite{tensorflow2015-whitepaper} in Python to train the model on a consumer computer with the following specefications:
+\begin{itemize}
+    \item CPU: Intel i5-8400
+    \item GPU: NVIDIA GeForce GTX 1060
+    \item RAM: 16GB
+\end{itemize}
 \begin{figure}[!htp]
     \centering
     \def\svgwidth{\columnwidth}
@@ -70,9 +87,6 @@
     \import{./figs/}{cnn_architecture.pdf_tex}
     \caption{The CNN architecture used to train the model}\label{fig:cnn_architecture}
 \end{figure}
-\Blindtext
-
-\section{Model Evaluation}
 \begin{figure}[!htp]
     \centering
     \scriptsize
@@ -86,6 +100,33 @@
     }
     \caption{The per--epoch progress of the model's performance }
 \end{figure}
+\Blindtext
+
+\section{Model Evaluation}
+Following training the model, we can define the trained model mathematically as a bayesian probability distribution over the 10 classes: $\hat{p}(y | x)$; the probability of a label $y$ given an image $x$.
+Testing the model on the test set nets us with a 2D matrix $a$, with $10000$ rows and $10$ columns.\@ The $i$\textsuperscript{th} row corresponds to the $i$\textsuperscript{th} image in the test set, and the $j$\textsuperscript{th} column corresponds to a digit $j$.\@ The value of $a_{i,j}$ is the probability that the $i$\textsuperscript{th} image contains the $j$\textsuperscript{th} digit, or mathematically:
+\begin{equation}
+    a_{i,j} = \hat{p}(y = j | x = i)
+\end{equation}
+We define the predicted label for an image $i$ as the label with the highest probability outputted by the model:
+\begin{equation}
+    y_i = \argmax_j a_{i,j}
+\end{equation}
+Where $y$ is the set of predicted outputs. Let $x$ be the set of actual labels, and let $C_{sd}$ be the set of images belonging to the digit $d$ in the set $s$ (for example: $C_{y0}$ is the set of images that are predicted to be 0/labeled as 0 in the set $y$):
+\begin{equation}
+    C_{sd} = \{i \in \{1, 2, \;\ldots, 10000\} : s_i = d\}
+\end{equation}
+and let the confusion matrix be:
+\begin{equation}
+    %\scriptstyle
+    M = \begin{bmatrix}
+        |C_{x0} \cap C_{y0}| &  \cdots & |C_{x0} \cap C_{y9}| \\
+        |C_{x1} \cap C_{y0}| &  \cdots & |C_{x1} \cap C_{y9}| \\
+        \vdots & \ddots & \vdots \\
+        |C_{x9} \cap C_{y0}| &  \cdots & |C_{x9} \cap C_{y9}|
+    \end{bmatrix}
+\end{equation}
+Plotting $M$ on a heatmap, we can see the confusion matrix in Figure \ref{fig:confusion_matrix}.
 \begin{figure}[!htp]
     \centering
     \def\svgwidth{\columnwidth}
@@ -93,15 +134,24 @@
     \import{./figs/}{confusion_matrix.pdf_tex}
     \caption{Confusion matrix of the trained model}\label{fig:confusion_matrix}
 \end{figure}
-\blindtext
+\par With the confusion matrix computed, we can define accuracy as the following equation using the confusion matrix:
+\begin{equation}
+    \text{accuracy} = \frac{\sum_{i = 0}^9 k_{ii}}{\sum_{i = 0}^9 \sum_{j = 0}^9 k_{ij}} \times 100
+\end{equation}
+where $k_{xy}$ represents an element in the $x^\text{th}$ row and $y^\text{th}$ column of the confusion matrix, in other words it is the sum of the elements in the diagonal of the confusion matrix (correct predictions), dividied by the total sum (total number of samples in the dataset). Calculating the values nets us a diagonal sum of $9908$, and since the test split of the MNIST dataset is $10000$ images, that gives us an accuracy of $99.08\%$.
+\par
+We can also calculate the per--digit accuracy of a digit $i$ as:
+\begin{equation}
+    \text{accuracy}_{i} = \frac{k_{ii}}{\sum_{j = 0}^9 k_{ij}} \times 100
+\end{equation}
+which gives us the values needed to plot the accuracy of each digit in the bar chart shown in Figure \ref{fig:bar}.
 \begin{figure}[!htp]
     \centering
     \def\svgwidth{\columnwidth}
-    \Huge
     \import{./figs/}{bar_plot.pdf_tex}
-    \caption{The accuracy of the model at detecting each digit}\label{fig:confusion_matrix_normalized}
+    \caption{The accuracy of the model at detecting each digit}\label{fig:bar}
 \end{figure}
-
+\par From the bar chart, we can see that the highest accuracy is achieved by the model detecting the digit $4$ at an accuracy of $99.8982\%$, and the lowest accuracy is detecting the digit $9$ with an accuracy of $98.1169\%$.
 \section{Conclusion}
 \blindtext
 
