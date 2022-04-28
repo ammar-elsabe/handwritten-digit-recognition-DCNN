@@ -5,6 +5,7 @@
 \usepackage[caption=false]{subfig}
 \usepackage{import}
 \usepackage{amsmath}
+\usepackage{listings}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
@@ -71,7 +72,7 @@ Computer vision is an interdisciplinary field that asks the question: ``Can a co
 \section{The MNIST Dataset}
 The Modified National Institute of Standards and Technology (MNIST) database is a database of handwritten digits \cite{6296535} that is a classic benchmark for image recognition.\@ It is also widely used in the machine learning world\cite{Platt1998}.\@ It consists of a training set of 60,000 images and a test set of 10,000 images.\@ The training set is used to train the network, and the test set is used to evaluate its performance.\@ The images are $28 \times 28$ pixels, and the labels are 0 to 9. It is a subset of a larger set available from NIST.\@ It was created in 1998 as a combination of two of their databases, Special Database 1 and 3, which contained digits written by high school students and empoyees of the United States Census Bureau, respectively.\@ Half of the database was taken from ``Special Database 1'', and the other half was taken from ``Special Database 3''. The original creators kept a list of the methods tested on it\cite{726791, mnist}, and in their original paper they used a Support Vector Machine (SVM) to achieve an accuracy of 99.2\%\cite{1265868}.
 \par
-There exists another database called Extended MNIST (EMNIST) created to the successor to MNIST\cite{emnist} created from NIST ``Special Database 19'', which includes the handwritten uppercase and lowercase letters, as well as digits.\cite{emnist2} EMNIST was created only using the digits subset of ``Special Database 19''. In the following sections of this paper, we use MNIST (not EMNIST) for testing our CNN.\@
+There exists another database called Extended MNIST (EMNIST) created to the successor to MNIST\cite{emnist} created from NIST ``Special Database 19'', which includes the handwritten uppercase and lowercase letters, as well as digits.\cite{emnist2} EMNIST was created only using the digits subset of ``Special Database 19''. In the following sections of this paper, we use MNIST (not EMNIST) for our CNN.\@
 
 \section{Training the model}
 We used Google's TensorFlow API\cite{tensorflow2015-whitepaper} in Python to train the model on a consumer computer with the following specefications:
@@ -80,6 +81,15 @@ We used Google's TensorFlow API\cite{tensorflow2015-whitepaper} in Python to tra
     \item GPU: NVIDIA GeForce GTX 1060
     \item RAM: 16GB
 \end{itemize}
+Instead of preprocessing the data, we elected to not preprocess the data at all (except for some automatic tuning and batching to speed up the training), but to have the model take the raw grayscale $28 \times 28$ pixel images.\@ We decided to do that in order to show how powerful DCNNs can be and how good they can be at feature extraction.\@
+As such, our neural network (Figure \ref{fig:cnn_architecture}) starts with a rescaling layer, which is nothing but normalizing the grayscale values from $[0, 255]$ to $[0, 1]$. It is then followed by a 2D convolutional layer with $28 \, 3 \times 3$ kernels, outputting 28 feature maps. The feature maps are then pooled with a $2 \times 2$ pool--size max pooling layer, cutting the amount of pixels in each feature map by $4$. We then apply batch normalization\cite{batchnorm} to reduce overfitting, and redo the above process once more before flattening the image.\@
+Following the flattening of the feature maps, we are left with a 1 dimensional vector of size 700, which is then inputted to a series of fully connected layers, with the number of perceptrons in each layer going $700 \to 128 \to 128 \to 1$. All the layers in the neural network used the relu activation function, except the last one which uses softmax to output its predictions.
+The losss function used was categorical crossentropy, which is:
+\begin{equation}
+    J(\textbf{w}) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \text{log}(\hat{y}_i) + (1-y_i) \text{log}(1-\hat{y}_i) \right]
+\end{equation}
+and the optimizer used was the ``Adam'' optimizer, which is a version of stochastic gradient descent\cite{adam} that we hyperparameterized with the default learning rate of $0.001$
+%The architecture used is shown in Figure \ref{fig:cnn_architecture}.  
 \begin{figure}[!htp]
     \centering
     \def\svgwidth{\columnwidth}
@@ -87,6 +97,20 @@ We used Google's TensorFlow API\cite{tensorflow2015-whitepaper} in Python to tra
     \import{./figs/}{cnn_architecture.pdf_tex}
     \caption{The CNN architecture used to train the model}\label{fig:cnn_architecture}
 \end{figure}
+\vfill\eject
+The callbacks used were the following:
+\begin{lstlisting}[language=Python]
+tf.keras.callbacks.EarlyStopping( 
+    monitor='val_loss',
+    patience=5,
+),
+tf.keras.callbacks.ModelCheckpoint( 
+    'model.h5',
+    monitor='val_loss',
+    save_best_only=True,
+    verbose=1)
+\end{lstlisting}
+That is to say that training stops once it plateaus (with 5 epochs and no improvement), and that we save the best performing model (in terms of validation loss), which we later load and use for the predictions.\@ With our architecture and even our cheap, widely available specifications, training took merely a limit, and the per--epoch progress is shown in Figure \ref{fig:perepoch}
 \begin{figure}[!htp]
     \centering
     \scriptsize
@@ -98,9 +122,9 @@ We used Google's TensorFlow API\cite{tensorflow2015-whitepaper} in Python to tra
         \def\svgwidth{0.5\columnwidth}
         \import{./figs/}{loss.pdf_tex}
     }
-    \caption{The per--epoch progress of the model's performance }
+    \caption{The per--epoch progress of the model's performance }\label{fig:perepoch}
 \end{figure}
-\Blindtext
+\par From Figure \ref{fig:perepoch}, we can see that the model reaches a high, near--human accuracy, but following the first epoch the rate of improvement decreases, and following the third epoch it begins to overfit, where the training loss and accuracies are steadily improving but the validation training and loss are in fact getting \textit{worse}.
 
 \section{Model Evaluation}
 Following training the model, we can define the trained model mathematically as a bayesian probability distribution over the 10 classes: $\hat{p}(y | x)$; the probability of a label $y$ given an image $x$.
@@ -115,13 +139,14 @@ We define the predicted label for an image $i$ as the label with the highest pro
 Where $y$ is the set of predicted outputs. Let $x$ be the set of actual labels, and let $C_{sd}$ be the set of images belonging to the digit $d$ in the set $s$ (for example: $C_{y0}$ is the set of images that are predicted to be 0/labeled as 0 in the set $y$):
 \begin{equation}
     C_{sd} = \{i \in \{1, 2, \;\ldots, 10000\} : s_i = d\}
+    \;\label{eq:setofimages}
 \end{equation}
-and let the confusion matrix be:
+\par A confusion matrix, also known as an error matrix, is a square matrix of size $n \times n$ where $n$ is the number of classes. It is a specifici table layout that allows the visualization of a model's performance. Each row of the matrix represents the instances in an actual class, while each column represents the instances in a predicted class\cite{Stehman1997}. With $C$ defined in (\ref{eq:setofimages}), we can mathematically denote the confusion matrix as:
 \begin{equation}
     %\scriptstyle
     M = \begin{bmatrix}
         |C_{x0} \cap C_{y0}| &  \cdots & |C_{x0} \cap C_{y9}| \\
-        |C_{x1} \cap C_{y0}| &  \cdots & |C_{x1} \cap C_{y9}| \\
+        %|C_{x1} \cap C_{y0}| &  \cdots & |C_{x1} \cap C_{y9}| \\
         \vdots & \ddots & \vdots \\
         |C_{x9} \cap C_{y0}| &  \cdots & |C_{x9} \cap C_{y9}|
     \end{bmatrix}
