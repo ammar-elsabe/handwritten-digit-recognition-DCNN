@@ -56,13 +56,10 @@
 
 \section{Introduction}
 \footnotetext[1]{Code can be found at \href{https://github.com/ammar-elsabe/handwritten-digit-recognition-DCNN.git}{\texttt{github.com/ammar-elsabe/handwritten-\\digit-recognition-DCNN.git}}}
-Computer vision is an interdisciplinary field that asks the question: ``Can a computer learn from pictures?''.\@ After all, a picture is worth a thousand words.\@ One interesting field of computer vision is Optical Character Recognition (OCR), which aims to identify the characters in documents. Given the ubiquity of handwritten documents in human transactions, OCR of documents have invaluable practical worth. Optical character recognition is a science that enables to translate various types of documents or images into analyzable, editable and searchable data.
-During last decade, researchers have used artificial intelligence / machine learning tools to automatically analyze handwritten and printed documents in order to convert them into electronic format.
-An OCR system depends mainly, on the extraction of
-features and discrimination/classification of these features
-(based on patterns). Handwritten OCR have received increasing attention as a subfield of OCR.\@ It is further categorized into offline\cite{article} and online systems\cite{Connell2001}.
-\blindtext
-
+Deep learning can now be applied to a growing variety of industries. Convolutional Neural Networking (CNN) is a deep learning technique for evaluating visual data. Convolutional Neural Networking can be used for object detection, face recognition, robotics, sound detection and recognition, video analysis, clustering, pattern recognition, language processing, weather prediction, spam detection, topic categorization, regression analysis, speech recognition, image classification, and handwritten digit recognition.
+ Object Character Recognition (OCR) is one of the influencing projects that has used deep learning (Object Character Recognition). OCR is a method of converting printed or written characters into encoded text. The OCR tool scans a document and extracts the information, which is then saved as a digital document. OCR may be implemented in two ways: one by identifying patterns in the characters, and the other by segmenting the text. In any case, machine learning is oblivious to this issue. Handwritten digit recognition (HDR) is a subset of OCR that recognizes digits rather than the entire character's data. HDR is a lighter and quicker alternative to OCR.\@ HDR has a lot of flexibility in areas like medicine, finance, student administration, and the taxes procedure.
+Handwritten digit recognition (HDR) refers to a computer's ability to recognize human handwritten digits from a variety of sources, such as photographs, papers, and touch displays, and classify them into ten specified categories (0--9). In the area of deep learning, this has been a topic of inexhaustible investigation. Numerous applications exist for digit recognition, including number plate identification, postal mail sorting, and bank check processing. Because handwritten digit identification is not an optical character recognition, we encounter several obstacles due to the various styles of writing used by different people. A human brain can simply analyse and extract data from a complex image, but for a computer, an image is just a collection of pixels, which are nothing more than a list of values ranging from 0 to 255, with blends such as RGB, B.W., greyscale, etc. Pixel values can be used to extract information from a picture.
+This paper experiments with a simple Deep Convolutional Neural Network on the MNIST\cite{6296535} dataset to evaluate their performance.\@ We delve into Convolutional Neural Networks in detail in Section \ref{sec:cnn} as a preliminary to describing the simple architecture used in Section \ref{sec:train}, and we evaluate the the model's performance in Section \ref{sec:test}.
 
 \section{The MNIST Dataset}
 The Modified National Institute of Standards and Technology (MNIST) database is a database of handwritten digits \cite{6296535} that is a classic benchmark for image recognition.\@ It is also widely used in the machine learning world\cite{Platt1998}.\@ It consists of a training set of 60,000 images and a test set of 10,000 images.\@ The training set is used to train the network, and the test set is used to evaluate its performance.\@ The images are $28 \times 28$ pixels, and the labels are 0 to 9. It is a subset of a larger set available from NIST.\@ It was created in 1998 as a combination of two of their databases, Special Database 1 and 3, which contained digits written by high school students and empoyees of the United States Census Bureau, respectively.\@ Half of the database was taken from ``Special Database 1'', and the other half was taken from ``Special Database 3''. The original creators kept a list of the methods tested on it\cite{726791, mnist}, and in their original paper they used a Support Vector Machine (SVM) to achieve an accuracy of 99.2\%\cite{1265868}.
@@ -74,7 +71,7 @@ There exists another database called Extended MNIST (EMNIST) created to the succ
     \caption{Examples from the MNIST dataset}\label{fig:mnist}
 \end{figure}
 
-\section{Convolutional Neural Networks}
+\section{Convolutional Neural Networks}\label{sec:cnn}
 Convolutional Neural Networks (CNNs) are compriesd of an input layer, hidden layers and an output layer. As with any feed-forward neural network, the middle layers are reffered to as hidden layers because their inputs and outputs are masked by the activation function and final convolution. In a CNN, these hidden layers include layers that perform convolutions, which usually involves computing a dot product of the convolution kernel and the layer's input matrix. The convolution operation generates a feature map as the convolution kernel slides along the input matrix for the layer, which then contributes to the input of the next layer. Other layers such as pooling layers, fully connected layers, and normalization layers are then added.
 \subsection{Convolutional Layers}
 The input to a CNN is a tensor with the following shape: (number of inputs) x (input height) x (input width) x (input channels). After passing through a convolutional layer, the image is abstracted to a feature map, also known as an activation map, with the following shape: (number of inputs) x (feature map height) x (feature map width) x (feature map channels).
@@ -86,7 +83,13 @@ Along with traditional convolutional layers, convolutional networks may include 
 \subsection{Fully Connected Layers}
 Layers that are fully connected connect every neuron in one layer to every neuron in the next layer. It functions similarly to a traditional multilayer perceptron neural network (MLP). To classify the images, the flattened matrix is passed through a fully connected layer.
 %\pagebreak
-\section{Training the model}
+\section{Training the model}\label{sec:train}
+We used Google's TensorFlow API\cite{tensorflow2015-whitepaper} in Python to train the model on a consumer computer with the following specefications:
+\begin{itemize}
+    \item CPU:\@ Intel i5--8400
+    \item GPU:\@ NVIDIA GeForce GTX 1060
+    \item RAM:\@ 16GB
+\end{itemize}
 \begin{figure}[!htp]
     \centering
     \def\svgwidth{\columnwidth}
@@ -94,12 +97,6 @@ Layers that are fully connected connect every neuron in one layer to every neuro
     \import{./figs/}{cnn_architecture.pdf_tex}
     \caption{The CNN architecture used to train the model}\label{fig:cnn_architecture}
 \end{figure}
-We used Google's TensorFlow API\cite{tensorflow2015-whitepaper} in Python to train the model on a consumer computer with the following specefications:
-\begin{itemize}
-    \item CPU:\@ Intel i5--8400
-    \item GPU:\@ NVIDIA GeForce GTX 1060
-    \item RAM:\@ 16GB
-\end{itemize}
 Instead of preprocessing the data, we elected to not preprocess the data at all (except for some automatic tuning and batching to speed up the training), but to have the model take the raw grayscale $28 \times 28$ pixel images.\@ We decided to do that in order to show how powerful DCNNs can be and how good they can be at feature extraction.\@
 As such, our neural network (Figure \ref{fig:cnn_architecture}) starts with a rescaling layer, which is nothing but normalizing the grayscale values from $[0, 255]$ to $[0, 1]$. It is then followed by a 2D convolutional layer with $28 \, 3 \times 3$ kernels, outputting 28 feature maps. The feature maps are then pooled with a $2 \times 2$ pool--size max pooling layer, cutting the amount of pixels in each feature map by $4$. We then apply batch normalization\cite{batchnorm} to reduce overfitting, and redo the above process once more before flattening the image.\@
 Following the flattening of the feature maps, we are left with a 1 dimensional vector of size 700, which is then inputted to a series of fully connected layers, with the number of perceptrons in each layer going $700 \to 128 \to 128 \to 10$. All the layers in the neural network used the relu activation function, except the last one which uses softmax to output its predictions.
@@ -138,7 +135,7 @@ That is to say that training stops once it plateaus (with 5 epochs and no improv
 \end{figure}
 \par From Figure \ref{fig:perepoch}, we can see that the model reaches a high, near--human accuracy, but following the first epoch the rate of improvement decreases, and following the third epoch it begins to overfit, where the training loss and accuracies are steadily improving but the validation training and loss are in fact getting \textit{worse}.
 
-\section{Model Evaluation}
+\section{Model Evaluation}\label{sec:test}
 Following training the model, we can define the trained model mathematically as a bayesian probability distribution over the 10 classes: $\hat{p}(y | x)$; the probability of a label $y$ given an image $x$.
 Testing the model on the test set nets us with a 2D matrix $a$, with $10000$ rows and $10$ columns.\@ The $i$\textsuperscript{th} row corresponds to the $i$\textsuperscript{th} image in the test set, and the $j$\textsuperscript{th} column corresponds to a digit $j$.\@ The value of $a_{i,j}$ is the probability that the $i$\textsuperscript{th} image contains the $j$\textsuperscript{th} digit, or mathematically:
 \begin{equation}
@@ -157,10 +154,10 @@ Where $y$ is the set of predicted outputs. Let $x$ be the set of actual labels, 
 \begin{equation}
     %\scriptstyle
     M = \begin{bmatrix}
-        |C_{x0} \cap C_{y0}| &  \cdots & |C_{x0} \cap C_{y9}| \\
-        %|C_{x1} \cap C_{y0}| &  \cdots & |C_{x1} \cap C_{y9}| \\
-        \vdots & \ddots & \vdots \\
-        |C_{x9} \cap C_{y0}| &  \cdots & |C_{x9} \cap C_{y9}|
+        |C_{x0} \cap C_{y0}| & |C_{x0} \cap C_{y1}| & \cdots & |C_{x0} \cap C_{y9}| \\
+        |C_{x1} \cap C_{y0}| & |C_{x1} \cap C_{y1}| & \cdots & |C_{x1} \cap C_{y9}| \\
+        \vdots & \vdots & \ddots & \vdots \\
+        |C_{x9} \cap C_{y0}| & |C_{x9} \cap C_{y1}| & \cdots & |C_{x9} \cap C_{y9}|
     \end{bmatrix}
 \end{equation}
 Plotting $M$ on a heatmap, we can see the confusion matrix in Figure \ref{fig:confusion_matrix}.
@@ -190,7 +187,7 @@ which gives us the values needed to plot the accuracy of each digit in the bar c
 \end{figure}
 \par From the bar chart, we can see that the highest accuracy is achieved by the model detecting the digit $4$ at an accuracy of $99.8982\%$, and the lowest accuracy is detecting the digit $9$ with an accuracy of $98.1169\%$.
 \section{Conclusion}
-In conclusion, we believe that DCNNs will have an important role in upcoming OCR technologies.\@ The results of our experiment are phenomonal, near--human accurate, and with very little cost.\@ There is the issue of our model overfitting too quickly (after just 3 epochs of training), but that can be attributed to the neural network architecture, and with some fine tuning can and has been brought to even more accurate levels.\@
+In conclusion, we believe that DCNNs have an important role in upcoming OCR technologies.\@ The results of our experiment are phenomonal, near--human accurate, and with very little cost in terms of time spent on developing the model, training the model, and the price of the hardware used.\@
 
 \bibliographystyle{IEEEtran}
 \bibliography{paper.bib}
