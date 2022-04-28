@@ -112,7 +112,7 @@ Layers that are fully connected connect every neuron in one layer to every neuro
     \caption{The CNN architecture used to train the model}\label{fig:cnn_architecture}
 \end{figure}
 In order to display the capabilities of DCNNs at finding the right features, no data preprocessing was done at all (except for some automatic tuning and batching to speed up the training), but to have the model take the raw grayscale $28 \times 28$ pixel images.\@
-As such, our neural network (Figure \ref{fig:cnn_architecture}) starts with a rescaling layer, which is nothing but normalizing the grayscale values from $[0, 255]$ to $[0, 1]$. It is then followed by a 2D convolutional layer with $28 \, 3 \times 3$ kernels, outputting 28 feature maps. The feature maps are then pooled with a $2 \times 2$ pool--size max pooling layer, cutting the amount of pixels in each feature map by $4$. We then apply batch normalization\cite{batchnorm} to reduce overfitting, and redo the above process once more before flattening the image.\@
+As such, the neural network (Figure \ref{fig:cnn_architecture}) starts with a rescaling layer, which is nothing but normalizing the grayscale values from $[0, 255]$ to $[0, 1]$. It is then followed by a 2D convolutional layer with $28 \, 3 \times 3$ kernels, outputting 28 feature maps. The feature maps are then pooled with a $2 \times 2$ pool--size max pooling layer, cutting the amount of pixels in each feature map by $4$. We then apply batch normalization\cite{batchnorm} to reduce overfitting, and redo the above process once more before flattening the image.\@
 Following the flattening of the feature maps, what remains is a 1 dimensional vector of size 700, which is then inputted to a series of fully connected layers, with the number of perceptrons in each layer going $700 \to 128 \to 128 \to 10$. All the layers in the neural network used the relu activation function, except the last one which uses softmax to output its predictions.
 \section{Training the model}
 \subsection{Hardware Used}
@@ -123,7 +123,7 @@ Google's TensorFlow API\cite{tensorflow2015-whitepaper} was used to train the mo
     \item RAM:\@ 16GB
 \end{itemize}
 \subsection{Preprocessing}
-As mentioned earlier, no preprocessing was done to the images, and for normalizing the pixel values to the $[0, 1]$ range, there is a rescaling/normalization layer at the forefront of the DCNN. The only thing in our data pipeline was an autotune prefetch and batching to $128$ images per patch, neither effect the images but have an effect on loading the images into memory (RAM), that was done to speed up the training process
+As mentioned earlier, no preprocessing was done to the images, and for normalizing the pixel values to the $[0, 1]$ range, there is a rescaling/normalization layer at the forefront of the DCNN. The only process in the data pipeline was an autotune prefetch and batching to $128$ images per patch, neither effect the images but have an effect on loading the images into memory (RAM), that was done to speed up the training process
 \subsection{Training Parameters}
 \subsubsection{Loss function}
 The loss function used was categorical crossentropy, which is:
@@ -149,9 +149,9 @@ tf.keras.callbacks.ModelCheckpoint(
     verbose=1
 )
 \end{lstlisting}
-That is to say that training stops once it plateaus (with 5 epochs and no improvement), and that the best performing model (in terms of validation loss)is saved, which is later loaded and used for the predictions.\@ 
+That is to say that training stops once it plateaus (with 5 epochs and no improvement), and that the best performing model (in terms of validation loss) is saved, which is later loaded and used for the predictions.\@ 
 \subsection{Training Performance}
-With the architecture described in Section \ref{sec:cnn} and even our cheap, widely available specifications, training took merely a minute, and the per--epoch progress is shown in Figure \ref{fig:perepoch}
+The training ran for 9 epochs before being stopped with the \verb|EarlyStopping| callback. With the architecture described in Section \ref{sec:cnn} and the cheap, widely available specifications, training took merely a minute, and the per--epoch progress is shown in Figure \ref{fig:perepoch}
 \begin{figure}[!htp]
     \centering
     \scriptsize
@@ -223,7 +223,7 @@ which gives us the values needed to plot the accuracy of each digit in the bar c
 \end{figure}
 \par From the bar chart, we can see that the highest accuracy is achieved by the model detecting the digit $4$ at an accuracy of $99.8982\%$, and the lowest accuracy is detecting the digit $9$ with an accuracy of $98.1169\%$.
 \section{Conclusion}
-In conclusion, we believe that DCNNs have an important role in upcoming OCR technologies.\@ The results of our experiment are phenomonal, near--human accurate, and with very little cost in terms of time spent on developing the model, training the model, and the price of the hardware used.\@
+In conclusion, we believe that DCNNs have an important role in upcoming OCR technologies.\@ The results of the experiment are phenomonal, near--human accurate, and with very little cost in terms of time spent on developing the model, training the model, and the price of the hardware used.\@
 
 \bibliographystyle{IEEEtran}
 \bibliography{paper.bib}
