@@ -6,19 +6,23 @@
 \usepackage{import}
 \usepackage{amsmath}
 \usepackage{listings}
+\usepackage{pdfpages}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
+    breaklinks=true,
     bookmarksopen=true,
 }
+
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
 
 \begin{document}
 
@@ -120,7 +124,7 @@ tf.keras.callbacks.ModelCheckpoint(
 )
 \end{lstlisting}
 That is to say that training stops once it plateaus (with 5 epochs and no improvement), and that we save the best performing model (in terms of validation loss), which we later load and use for the predictions.\@ With our architecture and even our cheap, widely available specifications, training took merely a minute, and the per--epoch progress is shown in Figure \ref{fig:perepoch}
-\begin{figure}[!h]
+\begin{figure}[!htp]
     \centering
     \scriptsize
     \subfloat[Training and validation accuracy\label{performance:accuracy}]{
@@ -191,5 +195,15 @@ In conclusion, we believe that DCNNs have an important role in upcoming OCR tech
 
 \bibliographystyle{IEEEtran}
 \bibliography{paper.bib}
+
+\onecolumn
+
+\includepdf[pages=-, addtotoc={
+    1,section,1,Appendix,Appendix,
+    1,subsection,2,Training Notebook,train}]
+    {./appendix/train.pdf}
+\includepdf[pages=-, addtotoc={
+    1,subsection,2,Testing Notebook,test}]
+    {./appendix/test.pdf}
 
 \end{document}
