@@ -55,7 +55,7 @@
 \end{abstract}
 
 \section{Introduction}
-\footnotetext[1]{Code can be found at \href{github.com/ammar-elsabe/handwritten-digit-recognition-DCNN.git}{\texttt{github.com/ammar-elsabe/handwritten-\\digit-recognition-DCNN.git}}}
+\footnotetext[1]{Code can be found at \href{https://github.com/ammar-elsabe/handwritten-digit-recognition-DCNN.git}{\texttt{github.com/ammar-elsabe/handwritten-\\digit-recognition-DCNN.git}}}
 Computer vision is an interdisciplinary field that asks the question: ``Can a computer learn from pictures?''.\@ After all, a picture is worth a thousand words.\@ One interesting field of computer vision is Optical Character Recognition (OCR), which aims to identify the characters in documents. Given the ubiquity of handwritten documents in human transactions, OCR of documents have invaluable practical worth. Optical character recognition is a science that enables to translate various types of documents or images into analyzable, editable and searchable data.
 During last decade, researchers have used artificial intelligence / machine learning tools to automatically analyze handwritten and printed documents in order to convert them into electronic format.
 An OCR system depends mainly, on the extraction of
@@ -63,39 +63,30 @@ features and discrimination/classification of these features
 (based on patterns). Handwritten OCR have received increasing attention as a subfield of OCR.\@ It is further categorized into offline\cite{article} and online systems\cite{Connell2001}.
 \blindtext
 
-\section{Convolutional Neural Networks}
-A convolutional neural network consists of an input layer, hidden layers and an output layer. In any feed-forward neural network, any middle layers are called hidden because their inputs and outputs are masked by the activation function and final convolution. In a convolutional neural network, the hidden layers include layers that perform convolutions. Typically this includes a layer that performs a dot product of the convolution kernel with the layer's input matrix. As the convolution kernel slides along the input matrix for the layer, the convolution operation generates a feature map, which in turn contributes to the input of the next layer. This is followed by other layers such as pooling layers, fully connected layers, and normalization layers.
-\subsection{Convolutional Layers}
-In a CNN, the input is a tensor with a shape: (number of inputs) x (input height) x (input width) x (input channels). After passing through a convolutional layer, the image becomes abstracted to a feature map, also called an activation map, with shape: (number of inputs) x (feature map height) x (feature map width) x (feature map channels).
-\par Convolutional layers convolve the input and pass its result to the next layer. This is similar to the response of a neuron in the visual cortex to a specific stimulus.
-
-\subsection{Pooling Layers}
-\blindtext
-
-\subsection{Fully Connected Layers}
-\blindtext
 
 \section{The MNIST Dataset}
 The Modified National Institute of Standards and Technology (MNIST) database is a database of handwritten digits \cite{6296535} that is a classic benchmark for image recognition.\@ It is also widely used in the machine learning world\cite{Platt1998}.\@ It consists of a training set of 60,000 images and a test set of 10,000 images.\@ The training set is used to train the network, and the test set is used to evaluate its performance.\@ The images are $28 \times 28$ pixels, and the labels are 0 to 9. It is a subset of a larger set available from NIST.\@ It was created in 1998 as a combination of two of their databases, Special Database 1 and 3, which contained digits written by high school students and empoyees of the United States Census Bureau, respectively.\@ Half of the database was taken from ``Special Database 1'', and the other half was taken from ``Special Database 3''. The original creators kept a list of the methods tested on it\cite{726791, mnist}, and in their original paper they used a Support Vector Machine (SVM) to achieve an accuracy of 99.2\%\cite{1265868}.
 \par
 There exists another database called Extended MNIST (EMNIST) created to the successor to MNIST\cite{emnist} created from NIST ``Special Database 19'', which includes the handwritten uppercase and lowercase letters, as well as digits.\cite{emnist2} EMNIST was created only using the digits subset of ``Special Database 19''. In the following sections of this paper, we use MNIST (not EMNIST) for our CNN.\@
 
+\begin{figure}[!htp]
+    \includegraphics[width=\columnwidth]{./figs/mnist.png}
+    \caption{Examples from the MNIST dataset}\label{fig:mnist}
+\end{figure}
+
+\section{Convolutional Neural Networks}
+Convolutional Neural Networks (CNNs) are compriesd of an input layer, hidden layers and an output layer. As with any feed-forward neural network, the middle layers are reffered to as hidden layers because their inputs and outputs are masked by the activation function and final convolution. In a CNN, these hidden layers include layers that perform convolutions, which usually involves computing a dot product of the convolution kernel and the layer's input matrix. The convolution operation generates a feature map as the convolution kernel slides along the input matrix for the layer, which then contributes to the input of the next layer. Other layers such as pooling layers, fully connected layers, and normalization layers are then added.
+\subsection{Convolutional Layers}
+The input to a CNN is a tensor with the following shape: (number of inputs) x (input height) x (input width) x (input channels). After passing through a convolutional layer, the image is abstracted to a feature map, also known as an activation map, with the following shape: (number of inputs) x (feature map height) x (feature map width) x (feature map channels).
+\par Convolutional layers convolve the input and pass the result to the following layer. This is analogous to a neuron's response to a specific stimulus in the visual cortex.
+
+\subsection{Pooling Layers}
+Along with traditional convolutional layers, convolutional networks may include local and/or global pooling layers. By combining the outputs of neuron clusters at one layer into a single neuron in the next layer, pooling layers reduce the dimensions of data. Local pooling combines small clusters, with tiling sizes as small as $2 \times 2$ being common. Global pooling affects all neurons in the feature map\cite{inproceedings, article2}. There are two types of pooling that are commonly used: maximum and average. The maximum value of each local cluster of neurons in the feature map is used in max pooling\cite{yamaguchi1990neural, 6248110}, while the average value is used in average pooling.
+
+\subsection{Fully Connected Layers}
+Layers that are fully connected connect every neuron in one layer to every neuron in the next layer. It functions similarly to a traditional multilayer perceptron neural network (MLP). To classify the images, the flattened matrix is passed through a fully connected layer.
+%\pagebreak
 \section{Training the model}
-We used Google's TensorFlow API\cite{tensorflow2015-whitepaper} in Python to train the model on a consumer computer with the following specefications:
-\begin{itemize}
-    \item CPU: Intel i5-8400
-    \item GPU: NVIDIA GeForce GTX 1060
-    \item RAM: 16GB
-\end{itemize}
-Instead of preprocessing the data, we elected to not preprocess the data at all (except for some automatic tuning and batching to speed up the training), but to have the model take the raw grayscale $28 \times 28$ pixel images.\@ We decided to do that in order to show how powerful DCNNs can be and how good they can be at feature extraction.\@
-As such, our neural network (Figure \ref{fig:cnn_architecture}) starts with a rescaling layer, which is nothing but normalizing the grayscale values from $[0, 255]$ to $[0, 1]$. It is then followed by a 2D convolutional layer with $28 \, 3 \times 3$ kernels, outputting 28 feature maps. The feature maps are then pooled with a $2 \times 2$ pool--size max pooling layer, cutting the amount of pixels in each feature map by $4$. We then apply batch normalization\cite{batchnorm} to reduce overfitting, and redo the above process once more before flattening the image.\@
-Following the flattening of the feature maps, we are left with a 1 dimensional vector of size 700, which is then inputted to a series of fully connected layers, with the number of perceptrons in each layer going $700 \to 128 \to 128 \to 10$. All the layers in the neural network used the relu activation function, except the last one which uses softmax to output its predictions.
-The losss function used was categorical crossentropy, which is:
-\begin{equation}
-    J(\textbf{w}) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \text{log}(\hat{y}_i) + (1-y_i) \text{log}(1-\hat{y}_i) \right]
-\end{equation}
-and the optimizer used was the ``Adam'' optimizer, which is a version of stochastic gradient descent\cite{adam} that we hyperparameterized with the default learning rate of $0.001$
-%The architecture used is shown in Figure \ref{fig:cnn_architecture}.  
 \begin{figure}[!htp]
     \centering
     \def\svgwidth{\columnwidth}
@@ -103,20 +94,36 @@ and the optimizer used was the ``Adam'' optimizer, which is a version of stochas
     \import{./figs/}{cnn_architecture.pdf_tex}
     \caption{The CNN architecture used to train the model}\label{fig:cnn_architecture}
 \end{figure}
+We used Google's TensorFlow API\cite{tensorflow2015-whitepaper} in Python to train the model on a consumer computer with the following specefications:
+\begin{itemize}
+    \item CPU:\@ Intel i5--8400
+    \item GPU:\@ NVIDIA GeForce GTX 1060
+    \item RAM:\@ 16GB
+\end{itemize}
+Instead of preprocessing the data, we elected to not preprocess the data at all (except for some automatic tuning and batching to speed up the training), but to have the model take the raw grayscale $28 \times 28$ pixel images.\@ We decided to do that in order to show how powerful DCNNs can be and how good they can be at feature extraction.\@
+As such, our neural network (Figure \ref{fig:cnn_architecture}) starts with a rescaling layer, which is nothing but normalizing the grayscale values from $[0, 255]$ to $[0, 1]$. It is then followed by a 2D convolutional layer with $28 \, 3 \times 3$ kernels, outputting 28 feature maps. The feature maps are then pooled with a $2 \times 2$ pool--size max pooling layer, cutting the amount of pixels in each feature map by $4$. We then apply batch normalization\cite{batchnorm} to reduce overfitting, and redo the above process once more before flattening the image.\@
+Following the flattening of the feature maps, we are left with a 1 dimensional vector of size 700, which is then inputted to a series of fully connected layers, with the number of perceptrons in each layer going $700 \to 128 \to 128 \to 10$. All the layers in the neural network used the relu activation function, except the last one which uses softmax to output its predictions.
+The loss function used was categorical crossentropy, which is:
+\begin{equation}
+    J(\textbf{w}) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \text{log}(\hat{y}_i) + (1-y_i) \text{log}(1-\hat{y}_i) \right]
+\end{equation}
+and the optimizer used was the ``Adam'' optimizer, which is a version of Stochastic Gradient Descent (SGD)\cite{adam} that we hyperparameterized with the default learning rate of $0.001$
+%The architecture used is shown in Figure \ref{fig:cnn_architecture}.  
 The callbacks used were the following:
 \begin{lstlisting}[language=Python]
 tf.keras.callbacks.EarlyStopping( 
-    monitor='val_loss',
+    monitor="val_loss",
     patience=5,
 ),
 tf.keras.callbacks.ModelCheckpoint( 
-    'model.h5',
-    monitor='val_loss',
+    "model.h5",
+    monitor="val_loss",
     save_best_only=True,
-    verbose=1)
+    verbose=1
+)
 \end{lstlisting}
-That is to say that training stops once it plateaus (with 5 epochs and no improvement), and that we save the best performing model (in terms of validation loss), which we later load and use for the predictions.\@ With our architecture and even our cheap, widely available specifications, training took merely a limit, and the per--epoch progress is shown in Figure \ref{fig:perepoch}
-\begin{figure}[!htp]
+That is to say that training stops once it plateaus (with 5 epochs and no improvement), and that we save the best performing model (in terms of validation loss), which we later load and use for the predictions.\@ With our architecture and even our cheap, widely available specifications, training took merely a minute, and the per--epoch progress is shown in Figure \ref{fig:perepoch}
+\begin{figure}[!h]
     \centering
     \scriptsize
     \subfloat[Training and validation accuracy\label{performance:accuracy}]{
