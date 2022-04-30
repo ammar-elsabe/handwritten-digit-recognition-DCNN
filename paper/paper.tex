@@ -8,6 +8,8 @@
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{pdfpages}
+\usepackage{tabularx}
+\usepackage{booktabs}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
@@ -79,6 +81,24 @@
 Deep learning can now be applied to a growing variety of industries. Convolutional Neural Networking (CNN) is a deep learning technique for evaluating visual data. Convolutional Neural Networking can be used for object detection, face recognition, robotics, sound detection and recognition, video analysis, clustering, pattern recognition, language processing, weather prediction, spam detection, topic categorization, regression analysis, speech recognition, image classification, and handwritten digit recognition.
  Object Character Recognition (OCR) is one of the influencing projects that has used deep learning (Object Character Recognition). OCR is a method of converting printed or written characters into encoded text. The OCR tool scans a document and extracts the information, which is then saved as a digital document. OCR may be implemented in two ways: one by identifying patterns in the characters, and the other by segmenting the text. In any case, machine learning is oblivious to this issue. Handwritten digit recognition (HDR) is a subset of OCR that recognizes digits rather than the entire character's data. HDR is a lighter and quicker alternative to OCR.\@ HDR has a lot of flexibility in areas like medicine, finance, student administration, and the taxes procedure.
 Handwritten digit recognition (HDR) refers to a computer's ability to recognize human handwritten digits from a variety of sources, such as photographs, papers, and touch displays, and classify them into ten specified categories (0--9). In the area of deep learning, this has been a topic of inexhaustible investigation. Numerous applications exist for digit recognition, including number plate identification, postal mail sorting, and bank check processing. A human brain can simply analyse and extract data from a complex image, but for a computer, an image is just a collection of pixels, which are nothing more than a list of values ranging from 0 to 255, with blends such as RGB, B.W., grayscale, etc. Pixel values can be used to extract information from a picture.
+\par Traditionally, HDR (and image classification in general) is done in the order shown in Figure \ref{fig:hdr}.
+The first stage is pre-processing. The main objective of pre-processing phase is to denoise and enhance the quality of scanned digit image. When a digit image is scanned, the image quality degrades, and some noise is introduced. The accuracy of the OCR system may be harmed by these settings. As a result, for an OCR system, it is important to decrease noise and increase the quality of the digit picture.
+One of the most critical processes in the analysis of processed picture data is image segmentation. Its fundamental purpose is to break a picture into segments that have a good association with real-world objects or regions. For a recognition system to work, segmentation is essential. The goal of segmentation is to divide a picture into distinct areas. The fundamental goal of digit image segmentation is to distinguish between the clear digit print region and the non-digit area.
+Feature extraction is a dimensionality reduction procedure that reduces a large collection of raw data into smaller groupings for processing. Feature extraction refers to strategies for selecting and/or combining variables into features in order to reduce the quantity of data that has to be processed while still properly and thoroughly characterizing the original data set.
+A digits recognition system's classification stage is the major decision-making stage. To identify the digits, this stage employs the characteristics gathered in the previous stage. Artificial neural networks are commonly utilized at this level\cite{Singh2011DIGITRS}.
+However, new upcoming technologies like deep learning and convolutional neural networks are powerful enough to learn the segmentation and feature extraction steps on their own, making the novel way of HDR as seen in Figure \ref{fig:newhdr}
+\begin{figure}[!htp]
+    \centering
+    %\scriptsize
+    \subfloat[The traditional method of HDR.\label{fig:hdr}]{
+        \includegraphics[width=0.5\columnwidth]{./figs/hdr}
+    }
+    \subfloat[The novel way of HDR\label{fig:newhdr}]{
+        \def\svgwidth{0.5\columnwidth}
+        \import{./figs/}{newhdr.pdf_tex}
+    }
+    \caption{The different ways of handwritten digit recognition (and image processing in general)}\label{fig:bothhdr}
+\end{figure}
 This paper experiments with a simple Deep Convolutional Neural Network on the MNIST\cite{6296535} dataset to evaluate their performance.\@ We delve into Convolutional Neural Networks in detail in Section \ref{sec:cnn} as a preliminary to describing the simple architecture used in Section \ref{sec:train}, and the model's performance is evalued in Section \ref{sec:test}.
 
 \section{The MNIST Dataset}
@@ -103,7 +123,101 @@ Along with traditional convolutional layers, convolutional networks may include 
 \subsection{Fully Connected Layers}
 Layers that are fully connected connect every neuron in one layer to every neuron in the next layer. It functions similarly to a traditional multilayer perceptron neural network (MLP). To classify the images, the flattened matrix is passed through a fully connected layer.
 %\pagebreak
-\section{Architecture of the DCNN}\label{sec:train}
+\section{Experimentation}
+The testing was done to find the best data split between $60:40$, $70:30$ and $80:20$, as well as the best combination of neurons in the hidden layers of the fully connected layers. Our model has 3 hidden fully connected layers, the combinations tested were the cartesian product of $A \times A \times A$ where $A = \{60, 80, 100\}$ (so the cartesian product = $\{(60, 60, 60), (60, 60, 80), \ldots, (80, 60, 70), \ldots, (100, 100, 100)\}$).\@ Hence, there was a total number of $3^4$ or $81$ tests.\@ The results of our tests are in Table \ref{tab:experiments}
+\begin{table}
+    \scriptsize
+    \caption{Experiment Results}\label{tab:experiments}
+    \begin{tabularx}{\columnwidth}{lXl}
+    \toprule
+    \textbf{Split} & \textbf{Neuron Counts} & \textbf{Accuracy}\\
+    \midrule
+    60\% & (60, 60, 60) & 0.99565625\\
+    60\% & (60, 60, 80) & 0.9928125\\
+    60\% & (60, 60, 100) & 0.9976875\\
+    60\% & (60, 80, 60) & 0.99740624\\
+    60\% & (60, 80, 80) & 0.9975\\
+    60\% & (60, 80, 100) & 0.9956094\\
+    60\% & (60, 100, 60) & 0.9963281\\
+    60\% & (60, 100, 80) & 0.9952656\\
+    60\% & (60, 100, 100) & 0.9957656\\
+    60\% & (80, 60, 60) & 0.99575\\
+    60\% & (80, 60, 80) & 0.9994531\\
+    60\% & (80, 60, 100) & 0.9948281\\
+    60\% & (80, 80, 60) & 0.99654686\\
+    60\% & (80, 80, 80) & 0.99771875\\
+    60\% & (80, 80, 100) & 0.9958125\\
+    60\% & (80, 100, 60) & 0.99546874\\
+    60\% & (80, 100, 80) & 0.99473435\\
+    60\% & (80, 100, 100) & 0.9971719\\
+    60\% & (100, 60, 60) & 0.99504685\\
+    60\% & (100, 60, 80) & 0.996375\\
+    60\% & (100, 60, 100) & 0.9964219\\
+    60\% & (100, 80, 60) & 0.996875\\
+    60\% & (100, 80, 80) & 0.9945\\
+    60\% & (100, 80, 100) & 0.9957656\\
+    60\% & (100, 100, 60) & 0.9973281\\
+    60\% & (100, 100, 80) & 0.99667186\\
+    60\% & (100, 100, 100) & 0.9947031\\
+    70\% & (60, 60, 60) & 0.99498415\\
+    70\% & (60, 60, 80) & 0.9980635\\
+    70\% & (60, 60, 100) & 0.9976032\\
+    70\% & (60, 80, 60) & 0.99655557\\
+    70\% & (60, 80, 80) & 0.99761903\\
+    70\% & (60, 80, 100) & 0.99788886\\
+    70\% & (60, 100, 60) & 0.9977143\\
+    70\% & (60, 100, 80) & 0.997\\
+    70\% & (60, 100, 100) & 0.99803174\\
+    70\% & (80, 60, 60) & 0.99655557\\
+    70\% & (80, 60, 80) & 0.99576193\\
+    70\% & (80, 60, 100) & 0.9939524\\
+    70\% & (80, 80, 60) & 0.9974762\\
+    70\% & (80, 80, 80) & 0.99714285\\
+    70\% & (80, 80, 100) & 0.9983492\\
+    70\% & (80, 100, 60) & 0.9983968\\
+    70\% & (80, 100, 80) & 0.99755555\\
+    70\% & (80, 100, 100) & 0.9970794\\
+    70\% & (100, 60, 60) & 0.9974286\\
+    70\% & (100, 60, 80) & 0.99509525\\
+    70\% & (100, 60, 100) & 0.9976984\\
+    70\% & (100, 80, 60) & 0.9967619\\
+    70\% & (100, 80, 80) & 0.9953016\\
+    70\% & (100, 80, 100) & 0.99703175\\
+    70\% & (100, 100, 60) & 0.9974286\\
+    70\% & (100, 100, 80) & 0.9985397\\
+    70\% & (100, 100, 100) & 0.99280953\\
+    80\% & (60, 60, 60) & 0.9987742\\
+    80\% & (60, 60, 80) & 0.9943871\\
+    80\% & (60, 60, 100) & 0.9971936\\
+    80\% & (60, 80, 60) & 0.9958387\\
+    80\% & (60, 80, 80) & 0.99696773\\
+    80\% & (60, 80, 100) & 0.99783874\\
+    80\% & (60, 100, 60) & 0.99491936\\
+    80\% & (60, 100, 80) & 0.9972903\\
+    80\% & (60, 100, 100) & 0.99762905\\
+    80\% & (80, 60, 60) & 0.99814516\\
+    80\% & (80, 60, 80) & 0.9982258\\
+    80\% & (80, 60, 100) & 0.99856454\\
+    80\% & (80, 80, 60) & 0.9972419\\
+    80\% & (80, 80, 80) & 0.99658066\\
+    80\% & (80, 80, 100) & 0.9979032\\
+    80\% & (80, 100, 60) & 0.99924195\\
+    80\% & (80, 100, 80) & 0.9973387\\
+    80\% & (80, 100, 100) & 0.9954194\\
+    80\% & (100, 60, 60) & 0.99664515\\
+    80\% & (100, 60, 80) & 0.99830645\\
+    80\% & (100, 60, 100) & 0.9995323\\
+    80\% & (100, 80, 60) & 0.99746776\\
+    80\% & (100, 80, 80) & 0.9966129\\
+    80\% & (100, 80, 100) & 0.99691933\\
+    80\% & (100, 100, 60) & 0.99701613\\
+    80\% & (100, 100, 80) & 0.9961129\\
+    80\% & (100, 100, 100) & 0.99858063\\
+    \bottomrule
+\end{tabularx}
+\end{table}
+As seen from Table \ref{tab:experiments}, the best result in accuracy was with the $80:20$ split and the $(100, 60, 100)$ neuon counts, netting us an accuracy of $99.95\%$
+\subsection{Architecture of the best DCNN}\label{sec:train}
 \begin{figure}[!htp]
     \centering
     \def\svgwidth{\columnwidth}
@@ -113,7 +227,7 @@ Layers that are fully connected connect every neuron in one layer to every neuro
 \end{figure}
 In order to display the capabilities of DCNNs at finding the right features, no data preprocessing was done at all (except for some automatic tuning and batching to speed up the training), but to have the model take the raw grayscale $28 \times 28$ pixel images.\@
 As such, the neural network (Figure \ref{fig:cnn_architecture}) starts with a rescaling layer, which is nothing but normalizing the grayscale values from $[0, 255]$ to $[0, 1]$. It is then followed by a 2D convolutional layer with $28 \, 3 \times 3$ kernels, outputting 28 feature maps. The feature maps are then pooled with a $2 \times 2$ pool--size max pooling layer, cutting the amount of pixels in each feature map by $4$. We then apply batch normalization\cite{batchnorm} to reduce overfitting, and redo the above process once more before flattening the image.\@
-Following the flattening of the feature maps, what remains is a 1 dimensional vector of size 700, which is then inputted to a series of fully connected layers, with the number of perceptrons in each layer going $700 \to 128 \to 128 \to 10$. All the layers in the neural network used the relu activation function, except the last one which uses softmax to output its predictions.
+Following the flattening of the feature maps, what remains is a 1 dimensional vector of size 700, which is then inputted to a series of fully connected layers, with the number of perceptrons in each layer going $700 \to 100 \to 60 \to 100 \to 10$. All the layers in the neural network used the relu activation function, except the last one which uses softmax to output its predictions.
 \section{Training the model}
 \subsection{Hardware Used}
 Google's TensorFlow API\cite{tensorflow2015-whitepaper} was used to train the model in Python on a consumer computer with the following specefications:
@@ -134,22 +248,24 @@ The loss function used was categorical crossentropy, which is:
 The optimizer used was the ``Adam'' optimizer, which is a version of Stochastic Gradient Descent (SGD)\cite{adam} that is hyperparameterized with the default learning rate of $0.001$
 %The architecture used is shown in Figure \ref{fig:cnn_architecture}.  
 \subsubsection{Number of Epochs}
-The (maximum) number of epochs was set to 20
-\subsubsection{Callbacks}
+The (maximum) number of epochs was set to 30, but there were callbacks used to stop the training early as seen in the following Section (\ref{sec:callbacks})
+\subsubsection{Callbacks}\label{sec:callbacks}
 The callbacks used were the following:
 \begin{lstlisting}[language=Python]
-tf.keras.callbacks.EarlyStopping( 
-    monitor="val_loss",
-    patience=5,
-),
-tf.keras.callbacks.ModelCheckpoint( 
-    "model.h5",
-    monitor="val_loss",
-    save_best_only=True,
-    verbose=1
-)
+callbacks=[
+    tf.keras.callbacks.EarlyStopping(
+        monitor='val_loss',
+        patience=3,
+    ),
+    tf.keras.callbacks.ModelCheckpoint(
+        model_name + '.h5',
+        monitor='val_loss',
+        save_best_only=True,
+        verbose=1
+    )
+]
 \end{lstlisting}
-That is to say that training stops once it plateaus (with 5 epochs and no improvement), and that the best performing model (in terms of validation loss) is saved, which is later loaded and used for the predictions.\@ 
+That is to say that training stops once it plateaus (with 3 epochs and no improvement), and that the best performing model (in terms of validation loss) is saved, which is later loaded and used for the predictions.\@ 
 \subsection{Training Performance}
 The training ran for 9 epochs before being stopped with the \verb|EarlyStopping| callback. With the architecture described in Section \ref{sec:cnn} and the cheap, widely available specifications, training took merely a minute, and the per--epoch progress is shown in Figure \ref{fig:perepoch}
 \begin{figure}[!htp]
@@ -208,7 +324,7 @@ With the confusion matrix computed, it can also be denoted as:
 \begin{equation}
     \text{accuracy\%} = \frac{\sum_{i = 0}^9 k_{ii}}{\sum_{i = 0}^9 \sum_{j = 0}^9 k_{ij}} \times 100
 \end{equation}
-where $k_{xy}$ represents an element in the $x^\text{th}$ row and $y^\text{th}$ column of the confusion matrix, in other words it is the sum of the elements in the diagonal of the confusion matrix (correct predictions), dividied by the total sum (total number of samples in the dataset). Calculating the values nets us a diagonal sum of $9908$, and since the test split of the MNIST dataset is $10000$ images, that gives us an accuracy of $99.08\%$.
+where $k_{xy}$ represents an element in the $x^\text{th}$ row and $y^\text{th}$ column of the confusion matrix, in other words it is the sum of the elements in the diagonal of the confusion matrix (correct predictions), dividied by the total sum (total number of samples in the dataset). Calculating the values nets us a diagonal sum of $9981$, and since the test split of the MNIST dataset is $10000$ images, that gives us an accuracy of $99.81\%$.
 \par
 We can also calculate the per--digit accuracy of a digit $i$ as:
 \begin{equation}
@@ -221,7 +337,7 @@ which gives us the values needed to plot the accuracy of each digit in the bar c
     \import{./figs/}{bar_plot.pdf_tex}
     \caption{The accuracy of the model at detecting each digit}\label{fig:bar}
 \end{figure}
-\par From the bar chart, we can see that the highest accuracy is achieved by the model detecting the digit $4$ at an accuracy of $99.8982\%$, and the lowest accuracy is detecting the digit $9$ with an accuracy of $98.1169\%$.
+\par From the bar chart, we can see that the highest accuracy is achieved by the model detecting the digit $0$ at an accuracy of $100\%$ (no errors), and the lowest accuracy is detecting the digit $3$ with an accuracy of $99.604\%$.
 \section{Conclusion}
 In conclusion, we believe that DCNNs have an important role in upcoming OCR technologies.\@ The results of the experiment are phenomonal, near--human accurate, and with very little cost in terms of time spent on developing the model, training the model, and the price of the hardware used.\@
 
